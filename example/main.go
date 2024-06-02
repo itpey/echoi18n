@@ -23,10 +23,10 @@ func main() {
 		if err != nil {
 			return echo.NewHTTPError(http.StatusInternalServerError, err.Error())
 		}
-		return c.String(200, localize)
+		return c.String(http.StatusOK, localize)
 	})
 	e.GET("/:name", func(c echo.Context) error {
-		return c.String(200, echoi18n.MustLocalize(c, &i18n.LocalizeConfig{
+		return c.String(http.StatusOK, echoi18n.MustLocalize(c, &i18n.LocalizeConfig{
 			MessageID: "welcomeWithName",
 			TemplateData: map[string]string{
 				"name": c.QueryParam("name"),
